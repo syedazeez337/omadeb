@@ -23,6 +23,13 @@ if ! grep -qi "debian" /etc/os-release; then
     exit 1
 fi
 
+# Check for git
+if ! command -v git >/dev/null 2>&1; then
+    echo "📦 'git' not found. Installing it first..."
+    sudo apt update
+    sudo apt install -y git
+fi
+
 # Clone full repo
 TMP_DIR="$(mktemp -d)"
 echo "📥 Cloning OmaDeb repo into $TMP_DIR"
